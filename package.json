@@ -1,0 +1,19 @@
+{
+  "name": "learn-ecommerce",
+  "version": "1.0.0",
+  "description": "THis project is to demostrate a simple login functionality,\r An ecommerce application,\r and ability to write web API using mongoDb,Node.js,and Express.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "app.js"
+  },
+  "author": "Chibuigwe",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
+  }
+}
