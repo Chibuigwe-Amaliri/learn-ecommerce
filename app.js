@@ -9,21 +9,20 @@ const port = 5000;
 // Instantiate express app
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 // estabilish middleware functions
+const adminRouter = require('./routes/admin');
+const shopRouter = require('./routes/shop');
+
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', (req, res,next) => {
-    res.send('Hello from Home page');
-});
-
-app.post('/add-product', (req, res,next) => {
-    res.send('Hello from add-product');
-})
+app.use('/admin', adminRouter.router);
+app.use(shopRouter);
 
 app.use('/', (req, res,next) => {
-    res.send('Hello from erro page');
+    res.status(404).render('404');
 })
 
 
