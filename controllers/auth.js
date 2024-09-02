@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const User = require('../models/user');
+const User = require('../model/user');
 
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
