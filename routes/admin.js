@@ -1,20 +1,22 @@
 const path = require('path');
+
 const express = require('express');
+
+const adminController = require('../controller/admin');
 
 const router = express.Router();
 
-const check = 'Hello chibuigwe';
+// include your admin routers
+ router.get('/add-product', adminController.getAddProduct);
 
-const products = [];
+ router.get('/products', adminController.getProducts);
 
-router.get('/add-product', (req, res, next) => {
-    res.render('add-product', {pageTitle: 'Add-Product'});
-});
+ router.post('/add-product', adminController.postProduct);
 
-router.post('/add-product', (req, res, next) => {
-    products.push({title: req.body.title});
-    res.redirect('/');
-})
+ router.get('/edit-product/:productId', adminController.getEditProduct);
 
-module.exports = {router, products};
+ router.post('/edit-product', adminController.postEditProduct);
 
+ router.post('/delete-product', adminController.postDeleteProduct);
+
+module.exports = router;
