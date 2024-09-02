@@ -6,11 +6,11 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-const errorController = require('./controller/error');
-const User = require('./model/user');
+const errorController = require('./controllers/error');
+const User = require('./models/user');
 
 const MONGODB_URI =
- 'mongodb+srv://amalirichibuigwe:123amaliri456@cluster0.ddoctyb.mongodb.net/exercise'
+  'mongodb+srv://amalirichibuigwe:123amaliri456@cluster0.ddoctyb.mongodb.net/shop';
 
 const app = express();
 const store = new MongoDBStore({
@@ -57,7 +57,7 @@ app.use(errorController.get404);
 mongoose
   .connect(MONGODB_URI)
   .then(result => {
-    app.listen(3000);
+    app.listen(4000);
   })
   .catch(err => {
     console.log(err);
