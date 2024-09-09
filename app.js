@@ -11,8 +11,8 @@ const flash = require('connect-flash');
 const errorController = require('./controllers/error');
 const User = require('./model/user');
 
-const MONGODB_URI =
-  'mongodb+srv://amalirichibuigwe:123amaliri456@cluster0.ddoctyb.mongodb.net/shop';
+const MONGODB_URI = 'mongodb+srv://amalirichibuigwe:123amaliri456@cluster0.ddoctyb.mongodb.net/shop';
+  
 
 const app = express();
 const store = new MongoDBStore({
@@ -67,10 +67,10 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(MONGODB_URI)
-  .then(result => {
-    app.listen(4000);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+.connect(MONGODB_URI)
+.then(result => {
+  app.listen(4000);
+})
+.catch(err => {
+  console.log(err);
+});

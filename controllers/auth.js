@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
-
+const {validationResult} = require('express-validator/check');
 const User = require('../model/user');
 
 const transporter = nodemailer.createTransport(
@@ -78,6 +78,15 @@ exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const confirmPassword = req.body.confirmPassword;
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    console.log(errors.array());
+    return res.status(422).render('auth/signup', {
+      path: '/signup',
+      pageTitle: 'Signup',
+      errorMessage: errors.array()[0].msg
+    });
+  }
   User.findOne({ email: email })
     .then(userDoc => {
       if (userDoc) {
@@ -127,12 +136,11 @@ exports.getReset = (req, res, next) => {
     message = null;
     //return message;
   }
- res.render('auth/reset', {
-  path: '/reset',
-  pageTitle: 'Reset Password',
-  errorMessage: message
-
- })
+  res.render('auth/reset', {
+    path: '/reset',
+    pageTitle: 'Reset Password',
+    errorMessage: message
+  })
 }
 
 exports.postReset = (req, res, next) => {
